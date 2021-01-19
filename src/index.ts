@@ -1,8 +1,10 @@
 import express from "express";
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const passport = require("passport");
+import passport from "passport";
 const cors = require('cors');
+
+const users = require("./routes/users");
 
 const app = express();
 
@@ -27,10 +29,9 @@ mongoose.connect(db, { useNewUrlParser: true,useUnifiedTopology: true})
 // Passport middleware
 app.use(passport.initialize());
 // Passport config
-//require("./config/passport")(passport);
+require("./config/passport")(passport);
 
 //Route Users
-const users = require("./routes/users");
 app.use("/api/users", users);
 
 

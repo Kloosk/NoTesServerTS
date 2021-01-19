@@ -42,12 +42,12 @@ router.post("/register", (req, res) => {
                     newUser
                         .save()
                         .then((user:any) =>{
-                            res.json(user);
+                            res.send("ok");
                             //Create new notes bind to User
                             const newNotes = new Notes({
                                 userId: user.id,
                             });
-                            newNotes.save().then.catch((err:never) => {
+                            newNotes.save().then().catch((err:never) => {
                                     throw new Error(err)
                                 });
                         }).catch((err:never) => {
