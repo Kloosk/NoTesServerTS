@@ -28,9 +28,6 @@ mongoose.connect(db, { useNewUrlParser: true,useUnifiedTopology: true})
 app.use(passport.initialize());
 // Passport config
 //require("./config/passport")(passport);
-app.get("/api/users",(req,res) => {
-   res.send("Hi");
-});
 
 //Route Users
 const users = require("./routes/users");

@@ -10,9 +10,9 @@ const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
 // Load User model
-const User = require("../../models/User");
+const User = require("../models/User");
 //Load Notes model
-const Notes = require("../../models/Notes");
+const Notes = require("../models/Notes");
 
 // @route POST api/users/register
 // @desc Register user
@@ -47,7 +47,7 @@ router.post("/register", (req, res) => {
                             const newNotes = new Notes({
                                 userId: user.id,
                             });
-                            newNotes.save().catch((err:never) => {
+                            newNotes.save().then.catch((err:never) => {
                                     throw new Error(err)
                                 });
                         }).catch((err:never) => {
@@ -108,3 +108,5 @@ router.post("/login", (req, res) => {
         });
     });
 });
+
+module.exports = router;
