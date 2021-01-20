@@ -16,15 +16,13 @@ const PublicNotes = require("../models/PublicNotes");
 // @access Private
 router.get("/dashboard",verify,(req, res) => {
     const {id} = (req as any).user;
-    Notes.findOne({id}).then((notes:any) => {
-        // Check if notes exist
-        if (!notes) {
-            return res.status(404).json({ errors: "Error: User not found" });
-        }
-        res.json({
-            data: notes.notes
-        });
-    });
+    Notes.findOne({userId:id})
+        .then((notes:any) => {
+            // Check if notes exist
+            if (!notes) return res.status(404).json({ errors: "Error: User not found" });
+            return res.json({data: notes.notes})})
+        .catch((err:never) => {throw new Error(err)});
+
 });
 
 // @route POST api/notes/add
