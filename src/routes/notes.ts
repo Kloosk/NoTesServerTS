@@ -111,6 +111,13 @@ router.get("/edit",verify,(req, res) => {
 // @desc Update note with passed num
 // @access Private
 router.post("/edit",verify,(req, res) => {
+    // Form validation
+    const { errors, isValid } = validateAddNote(req.body);
+    // Check validation
+    if (!isValid) {
+        return res.status(400).json({errors});
+    }
+
     let newObj = req.body;
     const {id} = (req as any).user;
     Notes.findOne({userId: id})
@@ -152,3 +159,5 @@ router.post("/delete",verify,(req, res) => {
                 .catch((err:never) => {throw new Error(err)});
         }).catch((err:never) => {throw new Error(err)});
 });
+
+module.exports = router;
