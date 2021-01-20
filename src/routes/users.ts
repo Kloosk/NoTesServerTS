@@ -4,6 +4,7 @@ import jwt  from "jsonwebtoken";
 
 const router = express.Router();
 const keys = require("../config/keys");
+const verify = require('../auth/verifyToken');
 
 // Load input validation
 const validateRegisterInput = require("../validation/register");
@@ -107,6 +108,33 @@ router.post("/login", (req, res) => {
             }
         });
     });
+});
+// @route POST api/users/changename
+// @desc Change name of user
+// @access Private
+router.post("/changename",verify,(req, res) => {
+    const data = req.body;
+    const {id} = (req as any).user;
+    if(typeof data.name === undefined){
+        return res.status(400).json({errors: ["Name doesn't exist"]});
+    }
+    if(data.name.length > 20 || data.name.length < 3){
+        return res.status(400).json({errors: ["Required length 3-20"]});
+    }
+    User.updateOne(//update username
+        {_id: id},
+        {$set: {name: data.name}})
+        .then(() => res.status(200).json({errors: []}))
+        .catch((err:never) => {throw new Error(err)});
+});
+// @route DELETE api/users/removeacc
+// @desc Remove account
+// @access Private
+router.delete("/removeacc",verify,(req, res) => {
+    const {id} = (req as any).user;
+    User.deleteOne({_id: id})
+        .then(() => res.status(200).json({}))
+        .catch((err:never) => {throw new Error(err)});
 });
 
 module.exports = router;

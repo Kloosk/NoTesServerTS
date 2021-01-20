@@ -3,7 +3,7 @@ import express from 'express';
 const router = express.Router();
 const verify = require('../auth/verifyToken');
 
-//Load Notes model
+//Load PublicNotes model
 const PublicNotes = require("../models/PublicNotes");
 
 // @route GET api/publicnotes

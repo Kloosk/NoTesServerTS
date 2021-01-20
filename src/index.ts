@@ -5,6 +5,8 @@ import passport from "passport";
 const cors = require('cors');
 
 const users = require("./routes/users");
+const notes = require("./routes/notes");
+const publicNotes = require("./routes/publicNotes");
 
 const app = express();
 
@@ -33,8 +35,10 @@ require("./config/passport")(passport);
 
 //Route Users
 app.use("/api/users", users);
-
-
+//Route PublicNotes
+app.use("/api/", publicNotes);
+//Route Notes
+app.use("/api/notes", notes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
