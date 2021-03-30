@@ -39,7 +39,7 @@ app.get('/newmember', (req, res, next) => __awaiter(void 0, void 0, void 0, func
     const token = req.header('Authorization');
     if (token) {
         try {
-            return res.json({ messages: ["raz", "dwa", "trzy"] });
+            return res.json(["raz", "dwa", "trzy"]);
         }
         catch (e) {
             res.status(401).send('Incorrect token');
