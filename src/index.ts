@@ -43,7 +43,7 @@ app.get('/newmember', async (req, res, next) => {
     const token = req.header('Authorization')
     if (token) {
         try {
-            return res.json([{id: 1, messages:["raz","dwa","trzy","4"]}])
+            return res.json([{id: 1, messages:["raz","dwa","trzy","4","add new user"]}])
         } catch (e) {
             res.status(401).send('Incorrect token')
         }
