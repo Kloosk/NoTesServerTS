@@ -39,6 +39,30 @@ app.use("/api/users", users);
 app.use("/api/", publicNotes);
 //Route Notes
 app.use("/api/notes", notes);
+app.get('/newmember', async (req, res, next) => {
+    const token = req.header('Authorization')
+    if (token) {
+        try {
+            return res.json(["raz","dwa","trzy"])
+        } catch (e) {
+            res.status(401).send('Incorrect token')
+        }
+    } else {
+        res.status(401).send('Not authorized')
+    }
+})
+app.post('/auth', async (req, res, next) => {
+    const { email, password } = req.body
+    if (!email || !password)
+        return res.status(400).send('Did not supply either email or password!')
+
+    const accessToken = 1234567891011121316466
+    return res.json({ accessToken })
+})
+
+
+
+
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
