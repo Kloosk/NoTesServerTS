@@ -39,11 +39,16 @@ app.use("/api/users", users);
 app.use("/api/", publicNotes);
 //Route Notes
 app.use("/api/notes", notes);
+const arrData = [{id: 3, message: "test 3"},{id: 1, message: "test one"},{id: 2, message: "test 2"}];
+let i=4;
+setTimeout(() => {
+    arrData.push({id: i, message: `test ${i}`});
+},30000);
 app.get('/newmember', async (req, res, next) => {
     const token = req.header('Authorization')
     if (token) {
         try {
-            return res.json([{id: 1,messages:[{id: 3, message: "test 3"},{id: 1, message: "test one"},{id: 2, message: "test 2"}]}])
+            return res.json([arrData])
         } catch (e) {
             res.status(401).send('Incorrect token')
         }
