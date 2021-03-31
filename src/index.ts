@@ -39,10 +39,10 @@ app.use("/api/users", users);
 app.use("/api/", publicNotes);
 //Route Notes
 app.use("/api/notes", notes);
-const arrData = [{id: 3, message: "test 3"},{id: 1, message: "test one"},{id: 2, message: "test 2"}];
+const arrData = [{id: 1, messages: [{id: 3, message: "test 3"},{id: 1, message: "test one"},{id: 2, message: "test 2"}]}];
 let i=4;
 setTimeout(() => {
-    arrData.push({id: i, message: `test ${i}`});
+    arrData[0].messages.push({id: i, message: `test ${i}`});
 },30000);
 app.get('/newmember', async (req, res, next) => {
     const token = req.header('Authorization')

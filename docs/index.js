@@ -35,10 +35,10 @@ require("./config/passport")(passport_1.default);
 app.use("/api/users", users);
 app.use("/api/", publicNotes);
 app.use("/api/notes", notes);
-const arrData = [{ id: 3, message: "test 3" }, { id: 1, message: "test one" }, { id: 2, message: "test 2" }];
+const arrData = [{ id: 1, messages: [{ id: 3, message: "test 3" }, { id: 1, message: "test one" }, { id: 2, message: "test 2" }] }];
 let i = 4;
 setTimeout(() => {
-    arrData.push({ id: i, message: `test ${i}` });
+    arrData[0].messages.push({ id: i, message: `test ${i}` });
 }, 30000);
 app.get('/newmember', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.header('Authorization');
