@@ -35,16 +35,16 @@ require("./config/passport")(passport_1.default);
 app.use("/api/users", users);
 app.use("/api/", publicNotes);
 app.use("/api/notes", notes);
-const arrData = [{ id: 1, messages: [{ id: 3, message: "test 3" }, { id: 1, message: "test one" }, { id: 2, message: "test 2" }] }];
+const arrData = [{ id: 3, message: "test 3" }, { id: 1, message: "test one" }, { id: 2, message: "test 2" }];
 let i = 4;
 setTimeout(() => {
-    arrData[0].messages.push({ id: i, message: `test ${i}` });
+    arrData.push({ id: i, message: `test ${i}` });
 }, 30000);
 app.get('/newmember', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.header('Authorization');
     if (token) {
         try {
-            return res.json([arrData]);
+            return res.json({ "notifcations": arrData });
         }
         catch (e) {
             res.status(401).send('Incorrect token');
