@@ -38,6 +38,7 @@ app.use("/api/notes", notes);
 const arrData = [{ id: 3, message: "test 3" }, { id: 1, message: "test one" }, { id: 2, message: "test 2" }];
 let i = 4;
 setInterval(() => {
+    i++;
     arrData.unshift({ id: i, message: `test ${i}` });
 }, 30000);
 app.get('/newmember', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
